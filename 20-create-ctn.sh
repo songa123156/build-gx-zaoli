@@ -33,22 +33,3 @@ docker run -d \
   $volume_map \
   $port_map \
   $ctn_img
-
-let max_wait=7
-while test $max_wait -gt 0
-do
-	echo "waiting for database being set up (stop in $max_wait minutes)"
-	sleep 60
-	found=$(docker logs $ctn_name 2>&1 | grep "^Version:.*-MariaDB")
-	if [ "$found"  != "" ]; then
-		echo "$found"
-		echo "BD created"
-		break
-	fi
-	let max_wait=$max_wait-1
-done
-
-
-
-
-
